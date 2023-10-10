@@ -1,7 +1,13 @@
 /* eslint-disable react/prop-types */
 import { useState } from "react";
 
-const Anecdote = ({ quote, votes }) => <p>{quote}<br />has {votes} votes</p>
+const Anecdote = ({ quote, votes }) => (
+  <p>
+    {quote}
+    <br />
+    has {votes} votes
+  </p>
+);
 
 const App = () => {
   const anecdotes = [
@@ -17,23 +23,29 @@ const App = () => {
 
   const [selected, setSelected] = useState(0);
   const [votes, setVotes] = useState(Array(anecdotes.length).fill(0));
+  const mostVotes = Math.max(...votes);
+  const mostIndex = votes.indexOf(mostVotes);
+
   const handleQuote = () => {
     const random = Math.floor(Math.random() * anecdotes.length);
-    setSelected(random)
-  }
+    setSelected(random);
+  };
   const handleVote = () => {
-    const copy = [...votes]
-    copy[selected] += 1
-    setVotes(copy)
-  }
+    const copy = [...votes];
+    copy[selected] += 1;
+    setVotes(copy);
+  };
 
   return (
     <div>
+      <h2>Anecdote of the Day</h2>
       <Anecdote quote={anecdotes[selected]} votes={votes[selected]} />
       <p>
-      <button onClick={handleVote}>vote</button>
-      <button onClick={handleQuote}>next anecdote</button>
+        <button onClick={handleVote}>vote</button>
+        <button onClick={handleQuote}>next anecdote</button>
       </p>
+      <h2>Anecdote with most votes</h2>
+      <Anecdote quote={anecdotes[mostIndex]} votes={votes[mostIndex]} />
     </div>
   );
 };
