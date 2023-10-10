@@ -1,7 +1,10 @@
 /* eslint-disable react/prop-types */
-const Person = (props) => {
+const Person = ({ person, deletePerson }) => {
 	return (
-		<p>{props.name} {props.number}</p>
+		<p>
+			{person.name} {person.number}
+			<button onClick={() => deletePerson(person.id)}>delete</button>
+		</p>
 	)
 }
 
