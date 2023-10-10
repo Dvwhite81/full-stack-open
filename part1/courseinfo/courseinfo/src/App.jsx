@@ -29,6 +29,8 @@ const Total = (props) => {
   );
 };
 
+// I guess I jumped ahead and did this part early,
+// but it made sense. I'll follow directions more closely.
 const App = () => {
   const course = {
     name: "Half Stack application development",
