@@ -16,33 +16,56 @@ const App = () => {
     personService.getAll().then((initialPersons) => setPersons(initialPersons));
   }, []);
 
+  const getNextOpenId = (id = 0) => {
+    let taken = persons.find(x => x.id === id);
+    if (taken !== undefined) {
+      return getNextOpenId(id + 1)
+    }
+    else {
+      return id
+    }
+  }
+
   const addPerson = (event) => {
     event.preventDefault();
     if (!newName.length) return alert("Name cannot be blank");
+
+    const personToAdd = persons.filter(person => person.name === newName)[0]
+    if (personToAdd) {
+      const updatedPersonObject = { ...personToAdd, number: newNumber }
+      if (window.confirm(`Replace ${newName}'s number with ${newNumber}?`)) {
+        personService
+          .update(updatedPersonObject.id, updatedPersonObject)
+          .then(returnedPerson => {
+            setPersons(persons.map(eachPerson => eachPerson.id !== personToAdd.id ? eachPerson : returnedPerson))
+            setNewName('')
+            setNewNumber('')
+          })
+      }
+    }
+    else {
     const personObject = {
       name: newName,
       number: newNumber,
-      id: persons.length + 1,
+      id: getNextOpenId()
     };
-
-    if (persons.find((person) => person.name === newName))
-      return alert(`${newName} is already added to phonebook`);
 
     personService.create(personObject).then((returnedPerson) => {
       setPersons(persons.concat(returnedPerson));
       setNewName("");
       setNewNumber("");
-    })
+    });
+    }
   };
 
   const deletePerson = (id) => {
-    const personToDelete = persons.filter(person => person.id === id)[0]
-    const deleteId = personToDelete.id
+    const personToDelete = persons.filter((person) => person.id === id)[0];
+    const deleteId = personToDelete.id;
     if (window.confirm(`Delete ${personToDelete.name}?`)) {
-      personService.remove(deleteId)
-      setPersons(persons.filter(person => person.id !== deleteId))
+      personService.remove(deleteId);
+      setPersons(persons.filter((person) => person.id !== deleteId));
     }
-  }
+  };
 
   const handleNameChange = (event) => {
     setNewName(event.target.value);
@@ -69,7 +92,11 @@ const App = () => {
         addPerson={addPerson}
       />
       <h3>Numbers</h3>
-      <Persons persons={persons} searchName={searchName} deletePerson={deletePerson} />
+      <Persons
+        persons={persons}
+        searchName={searchName}
+        deletePerson={deletePerson}
+      />
     </div>
   );
 };
