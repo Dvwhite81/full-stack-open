@@ -10,21 +10,38 @@ function App() {
   const [searchName, setSearchName] = useState("");
 
   useEffect(() => {
-    countryService
-      .getAll()
-      .then(countries => setCountries(countries))
-  })
+    countryService.getAll().then((countries) => setCountries(countries));
+  }, [searchName]);
 
   const handleSearchChange = (event) => {
-    setSearchName(event.target.value)
+    setSearchName(event.target.value);
+  };
+
+  const handleShowCountry = (country) => {
+    console.log('handleShow country:', country)
+    let temp = searchName;
+    setSearchName(country.name.common)
+    showCloseButton(temp)
+  }
+
+  const showCloseButton = (temp) => {
+    const button = document.querySelector('#close-show-country')
+    button.style.visibility = 'visible'
+    button.onclick = () => hideCloseButton(button, temp)
+  }
+
+  const hideCloseButton = (button, temp) => {
+    console.log('hideClose')
+    button.style.visibility = 'hidden'
+    setSearchName(temp)
   }
 
   return (
     <div>
       <Filter searchName={searchName} handleSearchChange={handleSearchChange} />
-      <Countries countries={countries} searchName={searchName} />
+      <Countries countries={countries} searchName={searchName} handleShowCountry={handleShowCountry} />
     </div>
-  )
+  );
 }
 
 export default App;

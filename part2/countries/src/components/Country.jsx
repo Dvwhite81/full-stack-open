@@ -1,7 +1,14 @@
 /* eslint-disable react/prop-types */
-const Country = ({ country, onlyCountry }) => {
+const Country = ({ country, onlyCountry, handleShowCountry }) => {
   if (!onlyCountry) {
-    return <p>{country.name.common}</p>;
+    return (
+			<div className="country-list">
+				<p>{country.name.common}</p>
+				<button onClick={() => {
+					handleShowCountry(country)
+				}}>show</button>
+			</div>
+		)
   } else {
     return (
       <div className="container">
@@ -20,9 +27,9 @@ const Country = ({ country, onlyCountry }) => {
             </ul>
           </div>
         </div>
-				<div className="right">
-					<img src={country.flags.png} />
-				</div>
+        <div className="right">
+          <img src={country.flags.png} />
+        </div>
       </div>
     );
   }

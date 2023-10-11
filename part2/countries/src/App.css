@@ -1,13 +1,29 @@
 #root {
+  background-color: aqua;
   display: flex;
-  max-height: 100vh;
+  height: 100vh;
   max-width: 1280px;
   padding: 1rem;
+  width: 100vw;
 }
 
 .container {
   display: grid;
   grid-template-columns: 1fr 1fr;
+}
+
+.search-div {
+  align-items: center;
+  display: flex;
+}
+
+#close-show-country {
+  visibility: hidden;
+}
+
+.country-list {
+  display: flex;
+  align-items: center;
 }
 
 img {

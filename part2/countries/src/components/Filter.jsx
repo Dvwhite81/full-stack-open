@@ -1,10 +1,15 @@
 /* eslint-disable react/prop-types */
-const Filter = ({ searchName, handleSearchChange }) => {
-	return (
-		<form>
-			find countries <input value={searchName} onChange={handleSearchChange} />
-		</form>
-	)
-}
+import CloseButton from "./CloseButton";
 
-export default Filter
+const Filter = ({ searchName, handleSearchChange }) => {
+  return (
+		<div className="search-div">
+			<form>
+				find countries <input value={searchName} onChange={handleSearchChange} />
+			</form>
+			<CloseButton />
+		</div>
+  );
+};
+
+export default Filter;
