@@ -1,16 +1,18 @@
 /* eslint-disable no-unused-vars */
 import { useState, useEffect } from "react";
-import axios from "axios";
 import Persons from "./components/Persons";
 import NewPerson from "./components/NewPerson";
 import Filter from "./components/Filter";
 import personService from "./services/persons";
+import Notification from "./components/Notification";
 
 const App = () => {
   const [persons, setPersons] = useState([]);
   const [newName, setNewName] = useState("");
   const [newNumber, setNewNumber] = useState("");
   const [searchName, setSearchName] = useState("");
+  const [errorMessage, setErrorMessage] = useState(null)
+  const [successMessage, setSuccessMessage] = useState(null)
 
   useEffect(() => {
     personService.getAll().then((initialPersons) => setPersons(initialPersons));
@@ -28,7 +30,13 @@ const App = () => {
 
   const addPerson = (event) => {
     event.preventDefault();
-    if (!newName.length) return alert("Name cannot be blank");
+    if (!newName.length) {
+      setErrorMessage('Name cannot be blank')
+      setTimeout(() =>{
+        setErrorMessage(null)
+      }, 3000)
+      return
+    }
 
     const personToAdd = persons.filter(person => person.name === newName)[0]
     if (personToAdd) {
@@ -40,6 +48,16 @@ const App = () => {
             setPersons(persons.map(eachPerson => eachPerson.id !== personToAdd.id ? eachPerson : returnedPerson))
             setNewName('')
             setNewNumber('')
+            setSuccessMessage(`Number was updated for ${updatedPersonObject.name}`)
+            setTimeout(() =>{
+              setSuccessMessage(null)
+            }, 3000)
+          })
+          .catch(error => {
+            setErrorMessage(`${updatedPersonObject.name} has already been removed from the server`)
+            setTimeout(() =>{
+              setErrorMessage(null)
+            }, 3000)
           })
       }
     }
@@ -54,6 +72,10 @@ const App = () => {
       setPersons(persons.concat(returnedPerson));
       setNewName("");
       setNewNumber("");
+      setSuccessMessage(`Entry added for ${personObject.name}`)
+      setTimeout(() =>{
+        setSuccessMessage(null)
+      }, 3000)
     });
     }
   };
@@ -64,6 +86,10 @@ const App = () => {
     if (window.confirm(`Delete ${personToDelete.name}?`)) {
       personService.remove(deleteId);
       setPersons(persons.filter((person) => person.id !== deleteId));
+      setSuccessMessage(`${personToDelete.name} was removed`)
+      setTimeout(() =>{
+        setSuccessMessage(null)
+      }, 3000)
     }
   };
 
@@ -82,6 +108,8 @@ const App = () => {
   return (
     <div>
       <h2>Phonebook</h2>
+      <Notification message={successMessage} type='success' />
+      <Notification message={errorMessage} type='error' />
       <Filter searchName={searchName} handleSearchChange={handleSearchChange} />
       <h3>add a new</h3>
       <NewPerson
