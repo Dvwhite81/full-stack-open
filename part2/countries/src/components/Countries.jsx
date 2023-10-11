@@ -11,12 +11,12 @@ const Countries = ({ countries, searchName }) => {
 
 
 	if (matchingCountries.length > 10) return <p>Too many matches, specify another filter</p>
-	if (matchingCountries.length === 1) return <Country country={matchingCountries[0]} />
+	if (matchingCountries.length === 1) return <Country country={matchingCountries[0]} onlyCountry={true} />
 
 	return (
 		<>
 			{matchingCountries.map(country => (
-				<Country key={country.ccn3} country={country} />
+				<Country key={country.ccn3} country={country} onlyCountry={false} />
 			))}
 		</>
 	)
