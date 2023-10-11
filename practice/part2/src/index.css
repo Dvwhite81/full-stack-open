@@ -1,0 +1,20 @@
+h1 {
+	color: green;
+	font-style: italic;
+}
+
+.note {
+	color: grey;
+	padding-top: 3px;
+	font-size: 15px;
+}
+
+.error {
+	background-color: lightgrey;
+	border-radius: 5px;
+	border-style: solid;
+	color: red;
+	font-size: 15px;
+	margin-bottom: 10px;
+	padding: 10px;
+}
