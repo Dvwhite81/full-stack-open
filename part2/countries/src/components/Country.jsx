@@ -1,24 +1,32 @@
 /* eslint-disable react/prop-types */
+import Weather from "./Weather";
+
 const Country = ({ country, onlyCountry, handleShowCountry }) => {
   if (!onlyCountry) {
     return (
-			<div className="country-list">
-				<p>{country.name.common}</p>
-				<button onClick={() => {
-					handleShowCountry(country)
-				}}>show</button>
-			</div>
-		)
+      <div className="country-list">
+        <p>{country.name.common}</p>
+        <button
+          onClick={() => {
+            handleShowCountry(country);
+          }}
+        >
+          show
+        </button>
+      </div>
+    );
   } else {
     return (
       <div className="container">
-        <div className="left">
+        <div className="country-info">
           <h2>{country.name.common}</h2>
           <div>
             <p>capital {country.capital[0]}</p>
             <p>area {country.area}</p>
           </div>
-          <h3>languages:</h3>
+        </div>
+        <div className="language-info">
+          <h2>languages:</h2>
           <div>
             <ul>
               {Object.values(country.languages).map((language) => (
@@ -27,9 +35,10 @@ const Country = ({ country, onlyCountry, handleShowCountry }) => {
             </ul>
           </div>
         </div>
-        <div className="right">
-          <img src={country.flags.png} />
+        <div className="flag-info">
+          <img className="flag-img" src={country.flags.png} />
         </div>
+        <Weather country={country} />
       </div>
     );
   }

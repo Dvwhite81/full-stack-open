@@ -1,6 +1,5 @@
 const CloseButton = () => {
+  return <button id="close-show-country">↶</button>;
+};
 
-	return <button id="close-show-country">↶</button>
-}
-
-export default CloseButton
+export default CloseButton;
