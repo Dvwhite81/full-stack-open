@@ -40,22 +40,28 @@ const App = () => {
         personService
           .update(id, changedPerson)
           .then((returnedPerson) => {
-            setPersons(persons.map((person) => person.id !== id ? person : returnedPerson));
-            setSuccessMessage(`Changed ${person.name}'s number to ${newNumber}`)
+            setPersons(
+              persons.map((person) =>
+                person.id !== id ? person : returnedPerson
+              )
+            );
+            setSuccessMessage(
+              `Changed ${person.name}'s number to ${newNumber}`
+            );
             setTimeout(() => {
-              setSuccessMessage(null)
+              setSuccessMessage(null);
             }, 3000);
-        })
-        .catch(error => {
-          setErrorMessage(
-            `Information of ${person.name} has already been removed from server`
-          )
-          setTimeout(() => {
-            setErrorMessage(null)
-          }, 3000);
-          setNewName("");
-          setNewNumber("");
-        })
+          })
+          .catch((error) => {
+            setErrorMessage(
+              `Information of ${person.name} has already been removed from server`
+            );
+            setTimeout(() => {
+              setErrorMessage(null);
+            }, 3000);
+            setNewName("");
+            setNewNumber("");
+          });
       }
     } else {
       const personObject = {
@@ -64,17 +70,15 @@ const App = () => {
         id: getNextOpenId(),
       };
 
-      personService
-        .create(personObject)
-        .then((returnedPerson) => {
-          setPersons(persons.concat(returnedPerson));
-          setNewName("");
-          setNewNumber("");
-          setSuccessMessage(`Added ${newName}`)
-          setTimeout(() => {
-            setSuccessMessage(null)
-          }, 3000);
-        });
+      personService.create(personObject).then((returnedPerson) => {
+        setPersons(persons.concat(returnedPerson));
+        setNewName("");
+        setNewNumber("");
+        setSuccessMessage(`Added ${newName}`);
+        setTimeout(() => {
+          setSuccessMessage(null);
+        }, 3000);
+      });
     }
   };
 
@@ -84,23 +88,21 @@ const App = () => {
     if (window.confirm(`Delete ${personToDelete.name}?`)) {
       personService
         .remove(deleteId)
-        .then(deletedPerson => {
+        .then((deletedPerson) => {
           setPersons(persons.filter((person) => person.id !== deleteId));
-          setSuccessMessage(`Removed ${newName}`)
+          setSuccessMessage(`Removed ${newName}`);
           setTimeout(() => {
-            setSuccessMessage(null)
+            setSuccessMessage(null);
           }, 3000);
         })
-        .catch(error => {
-          setErrorMessage(
-            `${newName} was already removed from phonebook`
-          )
+        .catch((error) => {
+          setErrorMessage(`${newName} was already removed from phonebook`);
           setTimeout(() => {
-            setErrorMessage(null)
+            setErrorMessage(null);
           }, 3000);
           setNewName("");
           setNewNumber("");
-        })
+        });
     }
   };
 
@@ -117,25 +119,32 @@ const App = () => {
   };
 
   return (
-    <div>
-      <h2>Phonebook</h2>
-      <Notification message={successMessage} type='success' />
-      <Notification message={errorMessage} type='error' />
-      <Filter searchName={searchName} handleSearchChange={handleSearchChange} />
-      <h3>add a new</h3>
-      <NewPerson
-        newName={newName}
-        newNumber={newNumber}
-        handleNameChange={handleNameChange}
-        handleNumberChange={handleNumberChange}
-        addPerson={addPerson}
-      />
-      <h3>Numbers</h3>
-      <Persons
-        persons={persons}
-        searchName={searchName}
-        deletePerson={deletePerson}
-      />
+    <div className="main-container">
+      <div className="phonebook-container">
+        <h2>Phonebook</h2>
+        <Notification message={successMessage} type="success" />
+        <Notification message={errorMessage} type="error" />
+        <Filter
+          searchName={searchName}
+          handleSearchChange={handleSearchChange}
+        />
+        <h3>add a new</h3>
+        <NewPerson
+          newName={newName}
+          newNumber={newNumber}
+          handleNameChange={handleNameChange}
+          handleNumberChange={handleNumberChange}
+          addPerson={addPerson}
+        />
+      </div>
+      <div className="numbers-container">
+        <h3>Numbers</h3>
+        <Persons
+          persons={persons}
+          searchName={searchName}
+          deletePerson={deletePerson}
+        />
+      </div>
     </div>
   );
 };
