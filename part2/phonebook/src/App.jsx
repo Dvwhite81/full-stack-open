@@ -93,7 +93,7 @@ const App = () => {
         })
         .catch(error => {
           setErrorMessage(
-            `${person.name} was already removed from phonebook`
+            `${newName} was already removed from phonebook`
           )
           setTimeout(() => {
             setErrorMessage(null)
