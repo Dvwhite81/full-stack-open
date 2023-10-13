@@ -90,7 +90,7 @@ const App = () => {
         .remove(deleteId)
         .then((deletedPerson) => {
           setPersons(persons.filter((person) => person.id !== deleteId));
-          setSuccessMessage(`Removed ${newName}`);
+          setSuccessMessage(`Removed ${personToDelete.name}`);
           setTimeout(() => {
             setSuccessMessage(null);
           }, 3000);
