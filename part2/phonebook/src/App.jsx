@@ -138,7 +138,7 @@ const App = () => {
         />
       </div>
       <div className="numbers-container">
-        <h3>Numbers</h3>
+        <h2>Numbers</h2>
         <Persons
           persons={persons}
           searchName={searchName}
