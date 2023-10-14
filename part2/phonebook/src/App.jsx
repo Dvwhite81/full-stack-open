@@ -44,7 +44,7 @@ const App = () => {
       })
       .catch((error) => {
         console.error(error.message);
-        setErrorMessage(`There was a problem adding ${newName}`);
+        setErrorMessage(error.response.data.error);
         setTimeout(() => {
           setErrorMessage(null);
         }, 3000);
