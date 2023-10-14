@@ -1,9 +1,9 @@
 const Filter = ({ searchFilter, handleSearchChange }) => {
   return (
-    <div>
-      filter shown with{" "}
+    <form>
+      filter shown with:{" "}
       <input value={searchFilter} onChange={handleSearchChange} />
-    </div>
+    </form>
   );
 };
 
