@@ -79,7 +79,10 @@ const App = () => {
         })
         .catch((error) => {
           console.error(error.message);
-          alert(`Information for ${newName} was already deleted from server`);
+          setErrorMessage(error.response.data.error);
+          setTimeout(() => {
+            setErrorMessage(null);
+          }, 3000);
         });
 
       setNewName("");
