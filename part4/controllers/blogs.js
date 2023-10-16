@@ -12,10 +12,14 @@ blogsRouter.get('/', (req, res) => {
 blogsRouter.post('/', (req, res, next) => {
   const blog = new Blog(req.body)
 
+  if (!blog.likes) {
+    blog.likes = 0
+  }
+
   blog
     .save()
     .then(savedBlog => {
-      res.json(savedBlog)
+      res.status(201).json(savedBlog)
     })
     .catch(error => next(error))
 })
