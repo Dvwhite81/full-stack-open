@@ -4,15 +4,18 @@ GET http://localhost:3003/api/blogs
 ###
 POST http://localhost:3003/api/blogs/ HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb3QiLCJpZCI6IjY1MmRlYjE2YTU3YTQzYWZlMTA5MTRjZCIsImlhdCI6MTY5NzUwODE0NCwiZXhwIjoxNjk3NTExNzQ0fQ.DQQxctcnPvMGfEzwkg-xw6_JxsyBl7fU6T22N8RX56c
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1sdXVra2FpIiwiaWQiOiI2NTJmMDVjMjZjMjI3YWM2NTdiOTE2NzUiLCJpYXQiOjE2OTc1ODA0OTgsImV4cCI6MTY5NzU4NDA5OH0.zPJY3OoCMsfwyqesYk9vZ9-jmaOOahqItfBBYyG4dpU
 
 {
-	"title": "Go To Statement Considered Harmful",
+	"title": "Blog to delete",
 	"author": "Edsger W. Dijkstra",
 	"url": "http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html",
-	"likes": 5,
-	"userId": "652ed333ac744ccf5e81b86e"
+	"likes": 5
 }
+
+###
+DELETE http://localhost:3003/api/blogs/652f05f76c227ac657b9167b
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1sdXVra2FpIiwiaWQiOiI2NTJmMDVjMjZjMjI3YWM2NTdiOTE2NzUiLCJpYXQiOjE2OTc1ODA0OTgsImV4cCI6MTY5NzU4NDA5OH0.zPJY3OoCMsfwyqesYk9vZ9-jmaOOahqItfBBYyG4dpU
 
 
 // Users
@@ -24,9 +27,9 @@ POST http://localhost:3003/api/users
 Content-Type: application/json
 
 {
-    "username": "root",
-    "name": "Superuser",
-    "password": "salainen"
+	"username": "mluukkai",
+	"name": "Matti Luukkainen",
+	"password": "salainen"
 }
 
 

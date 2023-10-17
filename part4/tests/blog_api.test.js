@@ -141,16 +141,52 @@ describe('when adding a blog', () => {
 })
 
 describe('when deleting a blog', () => {
+  let validation
+
+  beforeEach(async () => {
+    const newUser = {
+      username: 'mluukkai',
+      name: 'Matti Luukkainen',
+      password: 'salainen'
+    }
+
+    await api
+      .post('/api/users')
+      .send(newUser)
+
+    const result = api
+      .post('/api/login')
+      .send(newUser)
+
+    validation = {
+      'Authorization': `Bearer ${(await result).body.token}`
+    }
+  })
+
   test('succeeds with status code 204 if id is valid', async () => {
+    const newBlog = {
+      title: 'This blog will be deleted',
+      author: 'Delete Author',
+      url: 'http://www.delete-blog.com',
+      likes: 5
+    }
+
+    await api
+      .post('/api/blogs')
+      .send(newBlog)
+      .expect(201)
+      .set(validation)
+
     const blogsAtStart = await helper.blogsInDb()
-    const blogToDelete = blogsAtStart[0]
+    const blogToDelete = blogsAtStart.find(blog => blog.title === newBlog.title)
 
     await api
       .delete(`/api/blogs/${blogToDelete.id}`)
       .expect(204)
+      .set(validation)
 
     const blogsAtEnd = await helper.blogsInDb()
-    expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length - 1)
+    expect(blogsAtEnd).toHaveLength(blogsAtStart.length - 1)
 
     const titles = blogsAtEnd.map(blog => blog.title)
     expect(titles).not.toContain(blogToDelete.title)
