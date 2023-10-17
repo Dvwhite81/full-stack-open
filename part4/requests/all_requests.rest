@@ -28,3 +28,14 @@ Content-Type: application/json
     "name": "Superuser",
     "password": "salainen"
 }
+
+
+// Login
+###
+POST http://localhost:3003/api/login
+Content-Type: application/json
+
+{
+	"username": "mluukkai",
+	"password": "salainen"
+}
