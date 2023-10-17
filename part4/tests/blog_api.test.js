@@ -46,6 +46,27 @@ describe('when there are some initial blogs saved', () => {
 })
 
 describe('when adding a blog', () => {
+  let validation
+
+  beforeEach(async () => {
+    const newUser = {
+      username: 'mluukkai',
+      name: 'Matti Luukkainen',
+      password: 'salainen'
+    }
+
+    await api
+      .post('/api/users')
+      .send(newUser)
+
+    const result = api
+      .post('/api/login')
+      .send(newUser)
+
+    validation = {
+      'Authorization': `Bearer ${(await result).body.token}`
+    }
+  })
   test('a valid blog can be added', async () => {
     const newBlog = {
       title: 'test blog number one',
@@ -58,6 +79,7 @@ describe('when adding a blog', () => {
       .post('/api/blogs')
       .send(newBlog)
       .expect(201)
+      .set(validation)
       .expect('Content-Type', /application\/json/)
 
     const blogsAtEnd = await helper.blogsInDb()
@@ -80,6 +102,7 @@ describe('when adding a blog', () => {
       .post('/api/blogs')
       .send(noLikesBlog)
       .expect(201)
+      .set(validation)
       .expect('Content-Type', /application\/json/)
 
     const blogsAtEnd = await helper.blogsInDb()
@@ -104,11 +127,13 @@ describe('when adding a blog', () => {
       .post('/api/blogs')
       .send(noTitleBlog)
       .expect(400)
+      .set(validation)
 
     await api
       .post('/api/blogs')
       .send(noUrlBlog)
       .expect(400)
+      .set(validation)
 
     const blogsAtEnd = await helper.blogsInDb()
     expect(blogsAtEnd).toHaveLength(helper.initialBlogs.length)
