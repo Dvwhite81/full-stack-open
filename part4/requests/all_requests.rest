@@ -12,3 +12,18 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb
 	"url": "http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html",
 	"likes": 5
 }
+
+
+// Users
+###
+GET http://localhost:3003/api/users
+
+###
+POST http://localhost:3003/api/users
+Content-Type: application/json
+
+{
+    "username": "r",
+    "name": "Superuser",
+    "password": "salainen"
+}

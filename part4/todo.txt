@@ -1,1 +1,26 @@
+create users
+get all users
+
+username and password are required
+both min length 3
+username unique
+invalid - respond with error code and message
+
+populate adding blogs with a user being creator
+listing blogs shows user info
+listing users shows blogs
+
+use tokens
+
+adding a blog requires a valid user token in request
+
+refactor token to a middleware (tokenExtractor)
+
+deleting a blog can only be done by blog creator
+requires valid user token
+invalid - respond with error code
+
+userExtractor middleware to find user and set it to req object
+
+fix broken tests
 
