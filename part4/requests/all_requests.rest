@@ -10,7 +10,8 @@ Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InJvb
 	"title": "Go To Statement Considered Harmful",
 	"author": "Edsger W. Dijkstra",
 	"url": "http://www.u.arizona.edu/~rubinson/copyright_violations/Go_To_Considered_Harmful.html",
-	"likes": 5
+	"likes": 5,
+	"userId": "652ed333ac744ccf5e81b86e"
 }
 
 
@@ -23,7 +24,7 @@ POST http://localhost:3003/api/users
 Content-Type: application/json
 
 {
-    "username": "r",
+    "username": "root",
     "name": "Superuser",
     "password": "salainen"
 }
