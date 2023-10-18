@@ -4,7 +4,7 @@ GET http://localhost:3003/api/blogs
 ###
 POST http://localhost:3003/api/blogs/ HTTP/1.1
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1sdXVra2FpIiwiaWQiOiI2NTJmMDVjMjZjMjI3YWM2NTdiOTE2NzUiLCJpYXQiOjE2OTc2Mzk5OTgsImV4cCI6MTY5NzY0MzU5OH0.DvYD8h5QfSSJNUGssVIuVw3VRxvA9aIhlRwaKatSP6w
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6Im1sdXVra2FpIiwiaWQiOiI2NTJmZmMyOGI3Y2MxMDA0OGI1ODVlNWUiLCJpYXQiOjE2OTc2NDM1NjUsImV4cCI6MTY5NzY0NzE2NX0.cYdDNLaXJ3sLnJSyf4GbH-BeJUeHERqex3zMCGsqCzg
 
 {
 	"title": "Blog to delete",
@@ -27,9 +27,9 @@ POST http://localhost:3003/api/users
 Content-Type: application/json
 
 {
-	"username": "mluukkai",
-	"name": "Matti Luukkainen",
-	"password": "salainen"
+	"username": "Dan",
+	"name": "Dan White",
+	"password": "password"
 }
 
 
