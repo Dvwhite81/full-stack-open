@@ -91,7 +91,7 @@ body {
 }
 
 .word-wrap {
-  margin-bottom: 0.5rem;
+  margin-bottom: 10px;
   max-width: 80%;
   word-wrap: break-word;
 }
@@ -100,6 +100,10 @@ body {
   position: absolute;
   right: 0.5rem;
   top: 0.5rem;
+}
+
+.likes-container {
+  margin-bottom: 10px;
 }
 
 .likes-container button {
@@ -173,7 +177,8 @@ button:hover {
 }
 
 @media screen and (min-width: 800px) {
-  .main-container {
-    line-height: 3rem;
+  .likes-container,
+  .word-wrap {
+    margin-bottom: 5px;
   }
 }

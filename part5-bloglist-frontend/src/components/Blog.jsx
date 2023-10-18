@@ -19,7 +19,7 @@ const Blog = (props) => (
           {props.blog.likes}
           <button>Like</button>
         </div>
-
+        <div>{props.blog.user.name || props.user.name}</div>
       </div>
     </Toggleable>
   </div>
