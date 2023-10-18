@@ -4,12 +4,14 @@ import blogService from '../services/blogs'
 
 const Blog = (props) => {
   const [blogLikes, setBlogLikes] = useState(props.blog.likes)
+
   const like = async () => {
     const likes = props.blog.likes += 1
     const likedBlog = { ...props.blog, likes }
     await blogService.update(likedBlog.id, likedBlog)
     setBlogLikes(blogLikes + 1)
   }
+
   return (
     <div className='single-blog'>
       <div className='word-wrap'>

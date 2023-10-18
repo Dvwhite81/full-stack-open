@@ -1,4 +1,5 @@
 import { useState, useEffect } from 'react'
+import AllBlogs from './components/AllBlogs'
 import Blog from './components/Blog'
 import BlogForm from './components/BlogForm'
 import LoginForm from './components/LoginForm'
@@ -110,9 +111,7 @@ const App = () => {
             <BlogForm addBlog={addBlog} />
           </Toggleable>
           <div className="blogs-container">
-            {blogs.map((blog) => (
-              <Blog key={blog.id} blog={blog} user={user} />
-            ))}
+            <AllBlogs blogs={blogs} user={user} />
           </div>
         </div>
       )}
