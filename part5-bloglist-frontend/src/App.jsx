@@ -60,6 +60,22 @@ const App = () => {
     setUser(null)
   }
 
+  const addBlog = async (blog) => {
+    try {
+      const newBlog = await blogService.create(blog)
+      setBlogs(blogs.concat(newBlog))
+      setSuccessMessage(`Added your blog: ${blog.title}!`)
+      setTimeout(() => {
+        setSuccessMessage(null)
+      }, 3000)
+    } catch (exception) {
+      setErrorMessage(`There was a problem adding your blog`)
+      setTimeout(() => {
+        setErrorMessage(null)
+      }, 3000)
+    }
+  }
+
   if (user === null) {
     return (
       <div>
@@ -83,9 +99,11 @@ const App = () => {
       <Notification message={successMessage} type='success' />
       <Notification message={errorMessage} type='error' />
       <div>
-        <p>{user.username} logged in</p>
-        <button onClick={handleLogout}>Log Out</button>
-        <BlogForm
+        <p>
+          {user.username} logged in
+          <button onClick={handleLogout}>Log Out</button>
+        </p>
+        <BlogForm addBlog={addBlog}
         />
       </div>
       {blogs.map((blog) => (
