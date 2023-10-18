@@ -12,7 +12,6 @@ body {
   flex-direction: column;
   font-weight: bold;
   height: 100vh;
-  text-align: center;
   width: 100vw;
 }
 
@@ -34,7 +33,25 @@ body {
   display: grid;
   gap: 1rem;
   grid-template-columns: 1fr 1fr;
+  padding-top: 2rem;
   width: 80vw;
+}
+
+.one-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.two-columns {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.toggle-display-button {
+  left: 50%;
+  position: absolute;
+  top: 4rem;
+  transform: translate(-50%);
 }
 
 .user-logged-in {
@@ -53,9 +70,40 @@ body {
 
 .blogs-container {
   background-color: antiquewhite;
+  font-weight: normal;
   grid-row: 2;
-  overflow: scroll;
-  text-align: center;
+  height: 60vh;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+.single-blog {
+  align-items: start;
+  display: flex;
+  flex-direction: column;
+  height: fit-content;
+  padding: 1rem;
+  position: relative;
+}
+
+.blog-view-container {
+  width: 100%;
+}
+
+.word-wrap {
+  margin-bottom: 0.5rem;
+  max-width: 80%;
+  word-wrap: break-word;
+}
+
+.toggle-blog-view-button {
+  position: absolute;
+  right: 0.5rem;
+  top: 0.5rem;
+}
+
+.likes-container button {
+  margin-left: 1rem;
 }
 
 form {
