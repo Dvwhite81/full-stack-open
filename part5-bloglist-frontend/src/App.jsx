@@ -53,6 +53,13 @@ const App = () => {
     }
   }
 
+  const handleLogout = async (event) => {
+    event.preventDefault()
+
+    window.localStorage.removeItem('loggedBlogAppUser')
+    setUser(null)
+  }
+
   if (user === null) {
     return (
       <div>
@@ -77,6 +84,7 @@ const App = () => {
       <Notification message={errorMessage} type='error' />
       <div>
         <p>{user.username} logged in</p>
+        <button onClick={handleLogout}>Log Out</button>
         <BlogForm
         />
       </div>
