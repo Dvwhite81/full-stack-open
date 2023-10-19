@@ -103,6 +103,8 @@ body {
 }
 
 .likes-container {
+  align-items: center;
+  display: flex;
   margin-bottom: 10px;
 }
 

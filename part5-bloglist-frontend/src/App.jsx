@@ -74,13 +74,14 @@ const App = () => {
       blogFormRef.current.toggleVisibility()
       const newBlog = await blogService.create(blog)
       newBlog.user = user
+      console.log('addBlog user::::::', user)
       setBlogs(blogs.concat(newBlog))
       setSuccessMessage(`Added your blog: ${blog.title}!`)
       setTimeout(() => {
         setSuccessMessage(null)
       }, 3000)
     } catch (exception) {
-      setErrorMessage('There was a problem adding your blog')
+      setErrorMessage('There was a problem adding your blog. Try logging out and back in')
       setTimeout(() => {
         setErrorMessage(null)
       }, 3000)
@@ -120,7 +121,7 @@ const App = () => {
             <BlogForm addBlog={addBlog} />
           </Toggleable>
           <div className="blogs-container">
-            <AllBlogs blogs={blogs} user={user} setSuccessMessage={setSuccessMessage} />
+            <AllBlogs blogs={blogs} user={user} setSuccessMessage={setSuccessMessage} setErrorMessage={setErrorMessage} />
           </div>
         </div>
       )}

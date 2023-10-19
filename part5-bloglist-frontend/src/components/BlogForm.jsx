@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState } from 'react'
 
 const BlogForm = ({ addBlog }) => {
   const [title, setTitle] = useState('')
@@ -34,17 +34,17 @@ const BlogForm = ({ addBlog }) => {
     <div>
       <form onSubmit={createBlog}>
         <div>
-          Title: <input value={title} onChange={handleTitleChange} />
+          Title: <input id='title-input' value={title} onChange={handleTitleChange} />
         </div>
         <div>
-          Author: <input value={author} onChange={handleAuthorChange} />
+          Author: <input id='author-input' value={author} onChange={handleAuthorChange} />
         </div>
         <div>
-          Url: <input value={url} onChange={handleUrlChange} />
+          Url: <input id='url-input' value={url} onChange={handleUrlChange} />
         </div>
-        <button type="submit">Save</button>
+        <button id='new-blog-submit' type="submit">Save</button>
       </form>
     </div>
-)}
+  )}
 
 export default BlogForm

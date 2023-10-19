@@ -16,13 +16,21 @@ const Blog = (props) => {
 
   const deleteBlog = async (blog) => {
     if (window.confirm(`Remove ${blog.title}?`)) {
-      await blogService.remove(blog.id, props.user.token)
-      props.setSuccessMessage(`Successfully removed ${blog.title}!`)
-      setTimeout(() => {
-        props.setSuccessMessage(null)
-      }, 3000)
-      props.sortBlogs()
-      props.removeBlog(blog)
+      try {
+        await blogService.remove(blog.id, props.user.token)
+        props.setSuccessMessage(`Successfully removed ${blog.title}!`)
+        setTimeout(() => {
+          props.setSuccessMessage(null)
+        }, 3000)
+        props.sortBlogs()
+        props.removeBlog(blog)
+      } catch(exception) {
+        props.setErrorMessage('There was a problem adding your blog. Try logging out and back in')
+        setTimeout(() => {
+          props.setErrorMessage(null)
+        }, 3000)
+
+      }
     }
   }
 
@@ -42,8 +50,8 @@ const Blog = (props) => {
         <div className='blog-details'>
           <div className='word-wrap'>{props.blog.url}</div>
           <div className='likes-container'>
-            {blogLikes} likes
-            <button onClick={like}>Like</button>
+            <div className='blog-likes'>{blogLikes} likes</div>
+            <button className='like-btn' onClick={like}>Like</button>
           </div>
           <div>{props.blog.user.name || props.user.name}</div>
           {props.user.name === props.blog.user.name ?
