@@ -1,6 +1,5 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import AllBlogs from './components/AllBlogs'
-import Blog from './components/Blog'
 import BlogForm from './components/BlogForm'
 import LoginForm from './components/LoginForm'
 import Notification from './components/Notification'
@@ -18,7 +17,11 @@ const App = () => {
   const [containerDisplay, setContainerDisplay] = useState('one-column')
 
   useEffect(() => {
-    blogService.getAll().then((blogs) => setBlogs(blogs))
+    const fetchData = async () => {
+      const blogs = await blogService.getAll()
+      setBlogs(blogs)
+    }
+    fetchData()
   }, [])
 
   useEffect(() => {
@@ -44,6 +47,7 @@ const App = () => {
       setUser(user)
       setUsername('')
       setPassword('')
+      setContainerDisplay('one-column')
       setSuccessMessage(`Logged in ${username}!`)
       setTimeout(() => {
         setSuccessMessage(null)
@@ -63,9 +67,13 @@ const App = () => {
     setUser(null)
   }
 
+  const blogFormRef = useRef()
+
   const addBlog = async (blog) => {
     try {
+      blogFormRef.current.toggleVisibility()
       const newBlog = await blogService.create(blog)
+      newBlog.user = user
       setBlogs(blogs.concat(newBlog))
       setSuccessMessage(`Added your blog: ${blog.title}!`)
       setTimeout(() => {
@@ -107,11 +115,12 @@ const App = () => {
             setContainerDisplay={setContainerDisplay}
             buttonClass={'toggle-display-button'}
             buttonLabel="New Blog"
+            ref={blogFormRef}
           >
             <BlogForm addBlog={addBlog} />
           </Toggleable>
           <div className="blogs-container">
-            <AllBlogs blogs={blogs} user={user} />
+            <AllBlogs blogs={blogs} user={user} setSuccessMessage={setSuccessMessage} />
           </div>
         </div>
       )}
