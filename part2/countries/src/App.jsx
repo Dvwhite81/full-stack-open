@@ -18,7 +18,6 @@ function App() {
   };
 
   const handleShowCountry = (country) => {
-    console.log("handleShow country:", country);
     let temp = searchName;
     setSearchName(country.name.common);
     showCloseButton(temp);
@@ -31,7 +30,6 @@ function App() {
   };
 
   const hideCloseButton = (button, temp) => {
-    console.log("hideClose");
     button.style.visibility = "hidden";
     setSearchName(temp);
   };

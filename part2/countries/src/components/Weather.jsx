@@ -7,8 +7,6 @@ import axios from "axios";
 const Weather = ({ country }) => {
   const [weather, setWeather] = useState(null);
   const capital = country.capital[0];
-  console.log("country", country);
-  console.log("capital", capital);
 
   const getWeather = async () => {
     // eslint-disable-next-line no-undef
@@ -28,7 +26,6 @@ const Weather = ({ country }) => {
 
   if (!weather) return null;
 
-  console.log("WEATHER weather:", weather);
   const temp = weather.main.temp;
   const wind = weather.wind.speed;
   const icon = weather.weather[0].icon;

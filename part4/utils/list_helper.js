@@ -113,13 +113,10 @@ const mostLikes = (blogs) => {
   let authorLikes = {}
 
   blogs.forEach(blog => {
-    console.log('foreach blog:', blog)
     if (blog.author in authorLikes) {
       authorLikes[blog.author] += blog.likes
-      console.log('yes - author: likes', authorLikes)
     } else {
       authorLikes[blog.author] = blog.likes
-      console.log('no - author: likes', authorLikes)
     }
   })
 

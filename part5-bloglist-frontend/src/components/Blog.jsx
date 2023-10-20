@@ -6,7 +6,6 @@ const Blog = (props) => {
   const [blogLikes, setBlogLikes] = useState(props.blog.likes)
 
   const like = async () => {
-    console.log('like')
     const likes = props.blog.likes += 1
     const likedBlog = { ...props.blog, likes }
     await blogService.update(likedBlog.id, likedBlog)
@@ -55,7 +54,7 @@ const Blog = (props) => {
           </div>
           <div>{props.blog.user.name || props.user.name}</div>
           {props.user.name === props.blog.user.name ?
-            <button onClick={() => deleteBlog(props.blog)}>Remove</button>
+            <button className='delete-blog' onClick={() => deleteBlog(props.blog)}>Remove</button>
             : null}
         </div>
       </Toggleable>

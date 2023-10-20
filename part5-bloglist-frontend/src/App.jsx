@@ -74,7 +74,6 @@ const App = () => {
       blogFormRef.current.toggleVisibility()
       const newBlog = await blogService.create(blog)
       newBlog.user = user
-      console.log('addBlog user::::::', user)
       setBlogs(blogs.concat(newBlog))
       setSuccessMessage(`Added your blog: ${blog.title}!`)
       setTimeout(() => {
@@ -116,6 +115,7 @@ const App = () => {
             setContainerDisplay={setContainerDisplay}
             buttonClass={'toggle-display-button'}
             buttonLabel="New Blog"
+            buttonId="new-blog-btn"
             ref={blogFormRef}
           >
             <BlogForm addBlog={addBlog} />
