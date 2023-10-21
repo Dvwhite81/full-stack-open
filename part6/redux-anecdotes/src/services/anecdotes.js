@@ -13,7 +13,7 @@ const createNew = async (content) => {
   return response.data
 }
 
-const update = async anecdote => {
+const update = async (anecdote) => {
   console.log('UPDATE SERVICE')
   const id = anecdote.id
   const object = { ...anecdote, votes: anecdote.votes + 1 }

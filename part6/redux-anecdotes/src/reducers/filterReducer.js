@@ -7,8 +7,8 @@ const filterSlice = createSlice({
     filterChange(state, action) {
       state = action.payload
       return state
-    }
-  }
+    },
+  },
 })
 
 export const { filterChange } = filterSlice.actions

@@ -7,7 +7,9 @@ const Anecdote = ({ anecdote }) => {
 
   const handleVote = () => {
     dispatch(updateVotes(anecdote))
-    dispatch(changeNotification(`Added your vote for: '${anecdote.content}'`, 5))
+    dispatch(
+      changeNotification(`Added your vote for: '${anecdote.content}'`, 5)
+    )
   }
   return (
     <div className='anecdote' key={anecdote.id}>
@@ -22,22 +24,21 @@ const Anecdote = ({ anecdote }) => {
 
 const AnecdoteList = () => {
   const anecdotes = useSelector(({ filter, anecdotes }) => {
-    if ( filter === 'ALL' ) {
+    if (filter === 'ALL') {
       return anecdotes
     }
 
     const regex = new RegExp(filter, 'i')
-    return anecdotes.filter(anecdote => anecdote.content.match(regex))
+    return anecdotes.filter((anecdote) => anecdote.content.match(regex))
   })
 
   return (
     <div className='anecdote-container'>
-      {anecdotes.sort((a, b) => b.votes - a.votes).map((anecdote) => (
-        <Anecdote
-          key={anecdote.id}
-          anecdote={anecdote}
-        />
-      ))}
+      {anecdotes
+        .sort((a, b) => b.votes - a.votes)
+        .map((anecdote) => (
+          <Anecdote key={anecdote.id} anecdote={anecdote} />
+        ))}
     </div>
   )
 }
